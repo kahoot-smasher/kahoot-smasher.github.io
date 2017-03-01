@@ -82,7 +82,7 @@ function generateName(mode)
                 break;
             }
         case 3:
-            name = ($("#base").val());//.substr(0,11)); //+"." +generateRandomLetter(5)).substr(0,16);
+            name = ($("#base").val().substr(0,11)); //+"." +generateRandomLetter(5)).substr(0,16);
             break;
         default:
             name = "Smasher"+generateRandomLetter(5);
