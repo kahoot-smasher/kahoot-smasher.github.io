@@ -47,6 +47,23 @@ function randomCaps(baseName)
     return newName;
 }
 
+function PlainName(baseName)
+{
+    var newName1 = "";
+    for(var i=0; i< baseName.length; i++)
+    {
+        if(Math.random()>0.5)
+        {
+            newName1+=baseName[i];
+        }
+        else
+        {
+            newName1+=baseName[i];
+        }
+    }
+    return newName1;
+}
+
 
 function generateRandomLetter(length)
 {
@@ -82,7 +99,7 @@ function generateName(mode)
                 break;
             }
         case 3:
-            name = $("#base").val().substr(0,11) +"" +generateRandomLetter(0).substr(0,16);
+            name = PlainName($("#base").val());
             break;
         default:
             name = "Smasher"+generateRandomLetter(5);
