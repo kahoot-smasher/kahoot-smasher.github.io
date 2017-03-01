@@ -10,7 +10,7 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigat
 else
 {
 var buildNumber =0;
-var isSmasherInstalled = true; // default was false
+var isSmasherInstalled = false; // default was false
 var loadInline = true;
 var numberOfKahoots =20;
 var showCSS=false;
