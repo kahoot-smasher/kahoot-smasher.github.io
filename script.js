@@ -101,7 +101,7 @@ function generateName(mode)
         case 3:
             if($("#base").val().length<100)
             {
-                name = plainName($("#base").val()) + "." +generateRandomLetter(0);
+                name = plainName($("#base").val());// + "." +generateRandomLetter(0);
                 break;
             }
             else
