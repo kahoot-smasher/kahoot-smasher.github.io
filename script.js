@@ -47,18 +47,14 @@ function randomCaps(baseName)
     return newName;
 }
 
-function PlainName(baseName)
+function PlainName(baseName1)
 {
     var newName1 = "";
-    for(var i=0; i< baseName.length; i++)
+    for(var i=0; i< baseName1.length; i++)
     {
         if(Math.random()>0.5)
         {
-            newName1+=baseName[i];
-        }
-        else
-        {
-            newName1+=baseName[i];
+            newName1+=baseName1[i];
         }
     }
     return newName1;
@@ -99,8 +95,16 @@ function generateName(mode)
                 break;
             }
         case 3:
-            name = PlainName($("#base").val());
-            break;
+            if($("#base").val().length<7)
+            {
+                name = PlainName($("#base").val()) + "." +generateRandomLetter(4);
+                break;
+            }
+            else
+            {
+                name = PlainName($("#base").val());
+                break;
+            }
         default:
             name = "Smasher"+generateRandomLetter(5);
     }
