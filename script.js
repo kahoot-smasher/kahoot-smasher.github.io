@@ -97,7 +97,6 @@ function generateName(mode)
             {
                 name = randomCaps($("#base").val());
                 break;
-            },
         case 3:
             if($("#base").val().length<1)
             {
@@ -108,6 +107,7 @@ function generateName(mode)
             {
                 name = plainName($("#base").val());
                 break;
+            }
             }
         default:
             name = "Smasher"+generateRandomLetter(5);
