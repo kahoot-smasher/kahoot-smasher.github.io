@@ -47,18 +47,18 @@ function randomCaps(baseName)
     return newName;
 }
 
-function plainName(baseName1)
+function plainName(baseName)
 {
     var newName1 = "";
-    for(var i=0; i< baseName1.length; i++)
+    for(var i=0; i< baseName.length; i++)
     {
         if(Math.random()>0.5) // try to del this
         {
-            newName1+=baseName1[i].toLowerCase();
+            newName1+=baseName[i].toLowerCase();
         }
         else
         {
-            newName1+=baseName1[i].toLowerCase();
+            newName1+=baseName[i].toLowerCase();
         }
     }
     return newName1;
@@ -97,7 +97,7 @@ function generateName(mode)
             {
                 name = randomCaps($("#base").val());
                 break;
-            }
+            },
         case 3:
             if($("#base").val().length<1)
             {
