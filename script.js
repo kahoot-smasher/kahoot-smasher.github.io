@@ -54,11 +54,11 @@ function plainName(baseName1)
     {
         if(Math.random()>0.5)
         {
-            newName1+=baseName1[i].value();
+            newName1+=baseName1[i].val();
         }
         else
         {
-            newName1+=baseName1[i].value();
+            newName1+=baseName1[i].val();
         }
     }
     return newName1;
