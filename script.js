@@ -10,13 +10,13 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigat
 else
 {
 var buildNumber =0;
-var isSmasherInstalled = false; // default was false
+var isSmasherInstalled = false;
 var loadInline = true;
 var numberOfKahoots =20;
 var showCSS=false;
 var addMoreButton= document.createElement("input");
 var namingMethod = 0;
-var namingMethods = ["Random name","Random Ending","Random Caps","Choose Name"];
+var namingMethods = ["Random name","Random Ending","Random Caps"];
 var namesExample= ["Ben Dover","Eileen Dover","Not in ur class","Stephanie","Sportacus","Robbie Rotten","Ziggy","L0kesh;)","RealPerson.mp4","ur search history","Cael Cooper:)","Kim-Jong Uno","Sernie Banders","lorcan't","Not A Bot","setup.exe","admin1"];
 
 addMoreButton.type = "button";
@@ -37,31 +37,14 @@ function randomCaps(baseName)
     {
         if(Math.random()>0.5)
         {
-            newName+=baseName[i].toUpperCase();
+            newName+=baseName[i];//.toUpperCase();
         }
         else
         {
-            newName+=baseName[i].toLowerCase();
+            newName+=baseName[i];//.toLowerCase();
         }
     }
     return newName;
-}
-
-function plainName(baseName)
-{
-    var newName1 = "";
-    for(var i=0; i< baseName.length; i++)
-    {
-        if(Math.random()>0.5) // try to del this
-        {
-            newName1+=baseName[i].toLowerCase();
-        }
-        else
-        {
-            newName1+=baseName[i].toLowerCase();
-        }
-    }
-    return newName1;
 }
 
 
@@ -97,17 +80,6 @@ function generateName(mode)
             {
                 name = randomCaps($("#base").val());
                 break;
-        case 3:
-            if($("#base").val().length<1)
-            {
-                name = plainName($("#base").val()); + "." +generateRandomLetter(0);
-                break;
-            }
-            else
-            {
-                name = plainName($("#base").val());
-                break;
-            }
             }
         default:
             name = "Smasher"+generateRandomLetter(5);
