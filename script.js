@@ -52,13 +52,13 @@ function plainName(baseName1)
     var newName1 = "";
     for(var i=0; i< baseName1.length; i++)
     {
-        if(Math.random()>0.5)
+        if(Math.random()>0.5) // try to del this
         {
-            newName1+=baseName1[i].val();
+            newName1+=baseName1[i].toLowerCase();
         }
         else
         {
-            newName1+=baseName1[i].val();
+            newName1+=baseName1[i].toLowerCase();
         }
     }
     return newName1;
