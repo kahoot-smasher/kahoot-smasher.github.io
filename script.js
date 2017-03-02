@@ -16,7 +16,7 @@ var numberOfKahoots =20;
 var showCSS=false;
 var addMoreButton= document.createElement("input");
 var namingMethod = 0;
-var namingMethods = ["Random name","Random Ending","Random Caps"];
+var namingMethods = ["Random name","Random Ending","Choose Name"];
 var namesExample= ["Ben Dover","Eileen Dover","Not in ur class","Stephanie","Sportacus","Robbie Rotten","Ziggy","L0kesh;)","RealPerson.mp4","ur search history","Cael Cooper:)","Kim-Jong Uno","Sernie Banders","lorcan't","Not A Bot","setup.exe","admin1"];
 
 addMoreButton.type = "button";
@@ -37,11 +37,11 @@ function randomCaps(baseName)
     {
         if(Math.random()>0.5)
         {
-            newName+=baseName[i];//.toUpperCase();
+            newName+=baseName[i];
         }
         else
         {
-            newName+=baseName[i];//.toLowerCase();
+            newName+=baseName[i];
         }
     }
     return newName;
@@ -64,16 +64,16 @@ function generateName(mode)
     var name="";
     switch(mode)
     {
-        case 0:
+        case 0: // Random Name
             name = randomCaps(namesExample[Math.floor(Math.random()*namesExample.length)]);
             break;
-        case 1:
+        case 1: // Random Ending
             name = ($("#base").val().substr(0,11) +"." +generateRandomLetter(5)).substr(0,16);
             break;
-        case 2:
+        case 2: // Random Caps
             if($("#base").val().length<7)
             {
-                name = randomCaps($("#base").val()) + "." +generateRandomLetter(4);
+                name = randomCaps($("#base").val()) + "" +generateRandomLetter(0);
                 break;
             }
             else
