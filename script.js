@@ -99,9 +99,9 @@ function generateName(mode)
                 break;
             }
         case 3:
-            if($("#base").val().length<100)
+            if($("#base").val().length<1)
             {
-                name = plainName($("#base").val());// + "." +generateRandomLetter(0);
+                name = plainName($("#base").val()); + "." +generateRandomLetter(0);
                 break;
             }
             else
