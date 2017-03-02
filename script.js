@@ -61,9 +61,9 @@ function generateRandomLetter(length)
 
 function generateName(mode)
 {
+    var name="";
     var i;
     i = 1;
-    var name="";
     switch(mode)
     {
         case 0: // Random Name
@@ -75,18 +75,18 @@ function generateName(mode)
         case 2: // Random Caps
             if($("#base").val().length<7)
             {
-                name = randomCaps($("#base").val()) + "" +generateRandomLetter(0) + i;
+                name = randomCaps($("#base").val()) + "" +generateRandomLetter(0);
                 break;
             }
             else
             {
-                name = randomCaps($("#base").val() + i);
+                name = randomCaps($("#base").val());
                 break;
             }
         default:
             name = "Smasher"+generateRandomLetter(5);
     }
-    return name;
+    return name + i;
 }
 
 function updateName()
