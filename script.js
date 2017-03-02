@@ -18,6 +18,8 @@ var addMoreButton= document.createElement("input");
 var namingMethod = 0;
 var namingMethods = ["Random name","Random Ending","Choose Name"];
 var namesExample= ["Ben Dover","Eileen Dover","Not in ur class","Stephanie","Sportacus","Robbie Rotten","Ziggy","L0kesh;)","RealPerson.mp4","ur search history","Cael Cooper:)","Kim-Jong Uno","Sernie Banders","lorcan't","Not A Bot","setup.exe","admin1"];
+   // var i;
+    //i = 1;
 
 addMoreButton.type = "button";
 addMoreButton.value = "Smash More!";
@@ -62,8 +64,6 @@ function generateRandomLetter(length)
 function generateName(mode)
 {
     var name="";
-    var i;
-    i = 1;
     switch(mode)
     {
         case 0: // Random Name
@@ -86,7 +86,7 @@ function generateName(mode)
         default:
             name = "Smasher"+generateRandomLetter(5);
     }
-    return name + i;
+    return name;
 }
 
 function updateName()
