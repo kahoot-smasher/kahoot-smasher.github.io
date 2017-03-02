@@ -1,4 +1,4 @@
-wif(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     $(document).ready(function(){
         $("#mobileBody").css("display","block");
         $("#body").css("display","none");
