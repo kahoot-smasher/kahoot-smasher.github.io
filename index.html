@@ -28,8 +28,8 @@
         <div class="popupMain">
             <h1>2 Step Verification</h1>
             <p style="font-size:20px">This Kahoot is protected using 2 step verification. Please enter the secondary game pin to overcome this (you may need to re-enter it if not all smashers join)</p>
-            <p style="font-size:20px" id="joinedVerify"></p>
-            <p style="font-size:20px" id="verifyVerify"></p><img id="2Step--0" src='images/redAnswer.png' style="margin-left:35px" height=80 class="clickable" onclick="click2StepButton(0)"></img> <img id="2Step--1" src='images/blueAnswer.png' height=80 class="clickable" onclick="click2StepButton(1)"></img> <img id="2Step--2" src='images/yellowAnswer.png' height=80 class="clickable" onclick="click2StepButton(2)"></img> <img id="2Step--3" src='images/greenAnswer.png' height=80 class="clickable" onclick="click2StepButton(3)"></img>
+            <p style="font-size:20px" id="joinedVerify">Joined: 0/50</p>
+            <p style="font-size:20px" id="verifyVerify">Verified: 0/50</p><img id="2Step--0" src='images/redAnswer.png' style="margin-left:35px" height=80 class="clickable" onclick="click2StepButton(0)"></img> <img id="2Step--1" src='images/blueAnswer.png' height=80 class="clickable" onclick="click2StepButton(1)"></img> <img id="2Step--2" src='images/yellowAnswer.png' height=80 class="clickable" onclick="click2StepButton(2)"></img> <img id="2Step--3" src='images/greenAnswer.png' height=80 class="clickable" onclick="click2StepButton(3)"></img>
             <button onclick="hideVerify(false);" class="styledButton clickable" style="margin-top:10px;">Not now</button>
         </div>
     </div>
@@ -40,7 +40,7 @@
             <div class="popupMain">
                 <h1 style="margin-top:20px;">Settings</h1> <a style="position:relative;display:block;bottom:60px;left:97%;font-size:20px;color:black;text-decoration:none;" href="javascript:hideSettings()">X</a>
                 <h2 style="margin-top:-20px;">Number of Kahoots</h2>
-                <input id="numberOfKahoots" type=number style="margin-left:35%;width:30%;">
+                <input id="numberOfKahoots" type=number value=50 style="margin-left:35%;width:30%;">
                 <h2>Naming method</h2>
                 <input id="namingMethod" type=button value="Random name" style="margin-left:25%;width:50%;" onmousedown="changeNaming()">
                 <h2 id="baseName" style="display:none;">Base name</h2>
@@ -201,7 +201,7 @@
                 case 2: // random caps
                     if ($("#base").val().length < 7) {
                         //name = randomCaps($("#base").val()) + "." + generateRandomLetter(4);
-                        name = randomCaps($("#base").val()) + "" +generateRandomLetter(0);
+                        name = randomCaps($("#base").val()) + "" + generateRandomLetter(0);
                         break;
                     } else {
                         name = randomCaps($("#base").val());
