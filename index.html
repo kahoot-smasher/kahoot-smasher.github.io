@@ -19,7 +19,7 @@
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/eidclkcfbegpieiiglgnponaifabbnkh">
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
- <script src="script.js"></script>
+ <!--<script src="script.js"></script>-->
 </head>
 
 <body>
@@ -122,7 +122,8 @@
         var isSmasherInstalled = false;
         var numberOfKahoots = 50;
         var namingMethod = 0;
-        var namingMethods = ["Random name", "Random Ending", "Random Caps"];
+        var namingMethods = ["Random name","Random Ending","Choose Name"];
+        //var namingMethods = ["Random name", "Random Ending", "Random Caps"];
         var namesExample = ["Ben Dover", "Eileen Dover", "Not in ur class", "Stephanie", "Sportacus", "Robbie Rotten", "Ziggy", "L0kesh;)", "RealPerson.mp4", "ur search history", "Cael Cooper:)", "Kim-Jong Uno", "Sernie Banders", "lorcan't", "Not A Bot", "setup.exe", "admin1"];
         var addMoreButton = document.createElement("input");
         addMoreButton.type = "button";
@@ -191,15 +192,16 @@
         function generateName(mode) {
             var name = "";
             switch (mode) {
-                case 0:
+                case 0: // random name
                     name = randomCaps(namesExample[Math.floor(Math.random() * namesExample.length)]);
                     break;
-                case 1:
+                case 1: // random ending
                     name = ($("#base").val().substr(0, 11) + "." + generateRandomLetter(5)).substr(0, 16);
                     break;
-                case 2:
+                case 2: // random caps
                     if ($("#base").val().length < 7) {
-                        name = randomCaps($("#base").val()) + "." + generateRandomLetter(4);
+                        //name = randomCaps($("#base").val()) + "." + generateRandomLetter(4);
+                        name = randomCaps($("#base").val()) + "" +generateRandomLetter(0);
                         break;
                     } else {
                         name = randomCaps($("#base").val());
