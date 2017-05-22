@@ -7,339 +7,293 @@
 | |__| | (_| |\ V /  __/ | |__| | |_| | (__|   <  \__ \  __/  __/\__ \ | (_| | | |
 |_____/ \__,_| \_/ \___| |_____/ \__,_|\___|_|\_\ |___/\___|\___||___/  \__,_|_|_|
 -->
-<html>
-
-<head>
-    <title>Kahoot Smasher</title>
-    <link rel="icon" href="favicon.png">
-    <meta charset="UTF-8">
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <meta name="description" content="Kahoot smasher will spam any kahoot, joining it hundreds of times with random names and starting to answer the questions randomly">
-    <meta name="keywords" content="Kahoot,Smasher,Bot,Smash,Kahoot.it,Memes,Funny,spam">
-    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/eidclkcfbegpieiiglgnponaifabbnkh">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
- <!--<script src="script.js"></script>-->
-</head>
-
-<body>
-    <div id="2step" class="popup">
-        <div class="popupBack" onclick="$('#2step').slideUp(100)"></div>
-        <div class="popupMain">
-            <h1>2 Step Verification</h1>
-            <p style="font-size:20px">This Kahoot is protected using 2 step verification. Please enter the secondary game pin to overcome this (you may need to re-enter it if not all smashers join)</p>
-            <p style="font-size:20px" id="joinedVerify">Joined: 0/50</p>
-            <p style="font-size:20px" id="verifyVerify">Verified: 0/50</p><img id="2Step--0" src='images/redAnswer.png' style="margin-left:35px" height=80 class="clickable" onclick="click2StepButton(0)"></img> <img id="2Step--1" src='images/blueAnswer.png' height=80 class="clickable" onclick="click2StepButton(1)"></img> <img id="2Step--2" src='images/yellowAnswer.png' height=80 class="clickable" onclick="click2StepButton(2)"></img> <img id="2Step--3" src='images/greenAnswer.png' height=80 class="clickable" onclick="click2StepButton(3)"></img>
-            <button onclick="hideVerify(false);" class="styledButton clickable" style="margin-top:10px;">Not now</button>
+<title>Kahoot Smasher</title>
+<link href=favicon.png rel=icon>
+<meta charset=UTF-8>
+<meta content="width=device-width,initial-scale=1" name=viewport>
+<meta content="Kahoot smasher will spam any kahoot, joining it hundreds of times with random names and starting to answer the questions randomly" name=description>
+<meta content=Kahoot,Smasher,Bot,Smash,Kahoot.it,Memes,Funny,spam name=keywords>
+<link href=https://chrome.google.com/webstore/detail/eidclkcfbegpieiiglgnponaifabbnkh rel=chrome-webstore-item>
+<div id=asdfghjklqwertyuio basename=Smasher namingconvention=0 newrequests=0 steps="" value=""></div>
+<link href=style.css rel=stylesheet>
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js></script>
+<link href=//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css rel=stylesheet>
+<script src=https://code.jquery.com/ui/1.12.1/jquery-ui.js></script>
+<div class=popup id=2step>
+    <div class=popupBack onclick='$("#2step").slideUp(100)'></div>
+    <div class=popupMain>
+        <h1>2 Step Verification</h1>
+        <p style=font-size:20px>This Kahoot is protected using 2 step verification. Please enter the secondary game pin to overcome this (you may need to re-enter it if not all smashers join)
+            <p style=font-size:20px id=joinedVerify>Joined: 0/50
+                <p style=font-size:20px id=verifyVerify>Verified: 0/50</p><img height=80 src=images/redAnswer.png class=clickable id=2Step--0 onclick=click2StepButton(0) style=margin-left:35px><img height=80 src=images/blueAnswer.png class=clickable id=2Step--1 onclick=click2StepButton(1)><img height=80 src=images/yellowAnswer.png class=clickable id=2Step--2 onclick=click2StepButton(2)><img height=80 src=images/greenAnswer.png class=clickable id=2Step--3 onclick=click2StepButton(3)>
+                <button class="clickable styledButton" onclick=hideVerify(!1) style=margin-top:10px>Not now</button>
+    </div>
+</div>
+<div id=body>
+    <div class=popup id=settings>
+        <div class=popupBack onmousedown=hideSettings()></div>
+        <div class=popupMain>
+            <h1 style=margin-top:20px>Settings</h1><a href=javascript:hideSettings() style=position:relative;display:block;bottom:60px;left:97%;font-size:20px;color:#000;text-decoration:none>X</a>
+            <h2 style=margin-top:-20px>Number of Kahoots</h2>
+            <input id=numberOfKahoots style=margin-left:35%;width:30% value=50 type=number onchange=numberChanging()>
+            <h2>Naming method</h2>
+            <input id=namingMethod style=margin-left:25%;width:50% value="Random name" type=button class=clickable onmousedown=changeNaming()>
+            <h2 style=display:none id=baseName>Base name</h2>
+            <input id=base style=margin-left:25%;width:50%;display:none value=Smasher onchange=updateName() placeholder="Eg. Smasher">
+            <h3 id=nameExample>Name:</h3>
+            <button class="clickable styledButton" onclick=hideSettings() style=width:36%;margin-left:32%>Save</button>
         </div>
     </div>
-    </div>
-    <div id="body">
-        <div id="settings" class="popup">
-            <div class="popupBack" onmousedown="hideSettings()"></div>
-            <div class="popupMain">
-                <h1 style="margin-top:20px;">Settings</h1> <a style="position:relative;display:block;bottom:60px;left:97%;font-size:20px;color:black;text-decoration:none;" href="javascript:hideSettings()">X</a>
-                <h2 style="margin-top:-20px;">Number of Kahoots</h2>
-                <input id="numberOfKahoots" type=number value=50 style="margin-left:35%;width:30%;">
-                <h2>Naming method</h2>
-                <input id="namingMethod" type=button value="Random name" style="margin-left:25%;width:50%;" onmousedown="changeNaming()">
-                <h2 id="baseName" style="display:none;">Base name</h2>
-                <input id="base" type=text style="margin-left:25%;width:50%;display:none;" placeholder="Eg. Smasher" value="Smasher" onchange="updateName()">
-                <h3 id="nameExample">Name: </h3>
-                <button onclick="hideSettings()" class="styledButton" style="width:36%;margin-left:32%">Save</button>
-            </div>
-        </div>
-        <div id="info" class="popup">
-            <div class="popupBack" onmousedown="hideAbout()"></div>
-            <div class="popupMain">
-                <h1 style="margin-top:20px;">About</h1>
-                <p>Tired of having to do Kahoot after Kahoot. Well you're in luck!</p>
-                <p>Welcome to Kahoot Smasher, the one and only place where you can spam friends, family and even teachers with and endless stream of bots!</p>
-                <p>Its free to use and it's safe! (at least for you)</p>
-                <button onclick="hideAbout()" class="styledButton" style="width:36%;margin-left:32%;cursor:pointer;">Done</button>
-            </div>
-        </div>
-        <div id="install" class="popup">
-            <div class="popupBack" onmousedown="hideExtension()"></div>
-            <div class="popupMain">
-                <h1>Install extention</h1>
-                <h1>(Chrome only)</h1>
-                <p>Unfortunately smashing requires an extension</p>
-                <p>Please refresh once installed</p>
-                <h3 style="color:blue;cursor:pointer;" onmousedown="window.open('https://chrome.google.com/webstore/detail/kahoot-smasher/eidclkcfbegpieiiglgnponaifabbnkh')"><u>Alternate link</u></h3>
-                <button onclick="chrome.webstore.install()" class="styledButton" style="cursor:pointer;">Install</button>
-            </div>
-        </div>
-        <div id="update" class="popup">
-            <div class="popupBack" onmousedown="hideExtension()"></div>
-            <div class="popupMain">
-                <h1>Please update extention</h1>
-                <h1>(Chrome only)</h1>
-                <p>New features have been added to kahoot-smasher!</p>
-                <p>If the link below doesnt work, please remove the extension and reinstall it</p>
-                <p>Please refresh once extension is updated</p>
-                <h3 style="color:blue;cursor:pointer;" onmousedown="window.open('https://chrome.google.com/webstore/detail/kahoot-smasher/eidclkcfbegpieiiglgnponaifabbnkh')"><u>Alternate link</u></h3>
-                <button onclick="chrome.webstore.install()" class="styledButton" style="cursor:pointer;">Update</button>
-            </div>
-        </div><img src="gear.png" width=64 height=64 onmousedown="showSettings()" alt="Settings" style="cursor:pointer;"> <img src="info.png" width=64 height=64 onmousedown="showAbout()" alt="Smashr.tk" style="position:absolute;right:0%;cursor:pointer;"> <a id="smash" href="javascript:buttonClicked()">Smash it!</a>
-        <div id="mainpageID">
-            <input class="mainpage" id="GamePin" type="text" placeholder="Game PIN">
-            <input class="mainpage" id="EnterButton" type="button" value="Enter" onmousedown="buttonClicked()" style='cursor:pointer;'> </div>
-        <div id="androidApp" style="position:absolute;bottom:0;right:0;left:0;background-color:gray;margin-right:0;margin-left:0;display:none;"> <a onclick="$('#androidApp').slideUp(100)" style="position:relative;top:10px;left:98%;width:1%;height:-10px;cursor:pointer;"><b>X</b></a>
-            <p style="margin-top:-10px;font-size:30px;">There is now a SmashIt Android app!</p>
-            <p style="font-size:30px;"><a href="" onclick="window.open('https://play.google.com/store/apps/details?id=tk.smashr.kahootsmasher&hl=en','_blank')" style="position:relative;top:0;cursor:pointer;">Download now</a></p>
+    <div class=popup id=info>
+        <div class=popupBack onmousedown=hideAbout()></div>
+        <div class=popupMain>
+            <h1 style=margin-top:20px>About</h1>
+            <p>Tired of having to do Kahoot after Kahoot. Well you're in luck!
+                <p>Welcome to Kahoot Smasher, the one and only place where you can spam friends, family and even teachers with and endless stream of bots!
+                    <p>Its free to use and it's safe! (at least for you)</p>
+                    <button class=styledButton onclick=hideAbout() style=width:36%;margin-left:32%;cursor:pointer>Done</button>
         </div>
     </div>
-    <div id="mobileBody" style="display:none">
-        <h1 style="background-color:#864cbf;margin-top:0;width:111%;margin-left:-5.5%;padding:10px;">Kahoot Smasher Mobile</h1>
-        <p style="font-size:25px">Please visit this site on desktop</p>
-        <p style="font-size:25px">Unfortunately desktop site doesn't work on phones :-(</p>
-        <p style="font-size:25px">But there is an android app! :-)</p>
-        <p style="font-size:25px">It is now avalible on the play store</p>
-        <button class="styledButton" style="margin-left:35%;width:30%;height:50px;" onclick="window.open('https://play.google.com/store/apps/details?id=tk.smashr.kahootsmasher')"><b>Download here</b></button>
-        <div id="iphoneBody" style="display:none">
-            <hr>
-            <h2>IDevices</h2>
-            <p style="font-size:25px">You are using an iDevice</p>
-            <p style="font-size:25px">Unfortunately there is and will be no app for iPhones</p>
-            <p style="font-size:25px">You can still use this site on desktops and the app on android</p>
+    <div class=popup id=install>
+        <div class=popupBack onmousedown=hideExtension()></div>
+        <div class=popupMain>
+            <h1>Install extention</h1>
+            <h1>(Chrome only)</h1>
+            <p>Unfortunately smashing requires an extension
+                <p>Please refresh once installed
+                    <h3 onmousedown='window.open("https://chrome.google.com/webstore/detail/kahoot-smasher/eidclkcfbegpieiiglgnponaifabbnkh")' style=color:#00f;cursor:pointer><u>Alternate link</u></h3>
+                    <button class=styledButton onclick=chrome.webstore.install() style=cursor:pointer>Install</button>
         </div>
     </div>
-</body>
-<div id="asdfghjklqwertyuio" value="" namingConvention="0" baseName="Smasher" newRequests=0 steps=""></div>
+    <div class=popup id=update>
+        <div class=popupBack onmousedown=hideExtension()></div>
+        <div class=popupMain>
+            <h1>Please update extention</h1>
+            <h1>(Chrome only)</h1>
+            <p>New features have been added to kahoot-smasher!
+                <p>If the link below doesnt work, please remove the extension and reinstall it
+                    <p>Please refresh once extension is updated
+                        <h3 onmousedown='window.open("https://chrome.google.com/webstore/detail/kahoot-smasher/eidclkcfbegpieiiglgnponaifabbnkh")' style=color:#00f;cursor:pointer><u>Alternate link</u></h3>
+                        <button class=styledButton onclick=chrome.webstore.install() style=cursor:pointer>Update</button>
+        </div>
+    </div><img height=64 src=gear.png style=cursor:pointer alt=Settings onmousedown=showSettings() width=64> <img height=64 src=info.png style=position:absolute;right:0;cursor:pointer alt=Smashr.tk onmousedown=showAbout() width=64> <a href=javascript:buttonClicked() id=smash>Smash it!</a>
+    <div id=mainpageID>
+        <input id=GamePin class=mainpage placeholder="Game PIN">
+        <input id=EnterButton style=cursor:pointer value=Enter type=button class=mainpage onmousedown=buttonClicked()>
+        <div id=adHere style=background-color:#fff;width:300px;height:250px;border-radius:10px>
+            <script>
+                atOptions = {
+                    key: "c3e2c036669ee0e504f7e0587d0c95fa",
+                    format: "iframe",
+                    height: 250,
+                    width: 300,
+                    params: {}
+                }, document.write('<script type="text/javascript" src="http' + ("https:" === location.protocol ? "s" : "") + '://www.bnserving.com/invoke.js"><\/script>')
+            </script>
+        </div>
+    </div>
+    <div id=androidApp style=position:absolute;bottom:0;right:0;left:0;background-color:gray;margin-right:0;margin-left:0;display:none><a style=position:relative;top:10px;left:98%;width:1%;height:-10px;cursor:pointer onclick='$("#androidApp").slideUp(100)'><b>X</b></a>
+        <p style=margin-top:-10px;font-size:30px>There is now a SmashIt Android app!
+            <p style=font-size:30px><a href="" style=position:relative;top:0;cursor:pointer onclick='window.open("https://play.google.com/store/apps/details?id=tk.smashr.kahootsmasher&hl=en","_blank")'>Download now</a></div>
+</div>
+<div id=mobileBody style=display:none>
+    <h1 style=background-color:#864cbf;margin-top:0;width:111%;margin-left:-5.5%;padding:10px>Kahoot Smasher Mobile</h1>
+    <p style=font-size:25px>Please visit this site on desktop
+        <p style=font-size:25px>Unfortunately desktop site doesn't work on phones :-(
+            <p style=font-size:25px>But there is an android app! :-)
+                <p style=font-size:25px>It is now avalible on the play store</p>
+                <button class=styledButton onclick='window.open("https://play.google.com/store/apps/details?id=tk.smashr.kahootsmasher")' style=margin-left:35%;width:30%;height:50px><b>Download here</b></button>
+                <div id=iphoneBody style=display:none>
+                    <hr>
+                    <h2>IDevices</h2>
+                    <p style=font-size:25px>You are using an iDevice
+                        <p style=font-size:25px>Unfortunately there is and will be no app for iPhones
+                            <p style=font-size:25px>You can still use this site on desktops and the app on android</div>
+</div>
+<div id=dialog style=display:none title="Too many smashers!">
+    <p>Most computers cannot handle more than 1000 bots! :-(</div>
+<div id=warningDialog style=display:none title="High number of smashers!">
+    <p>Warning: More than 200 smashers might be slow to answer!</div>
 <script>
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $(document).ready(function() {
-            $("#mobileBody").css("display", "block");
-            $("#body").css("display", "none");
-            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                $("#iphoneBody").css("display", "block");
-            }
-        });
-    } else {
-        var verficationCode = "";
-        var buildNumber = -1;
-        var isSmasherInstalled = false;
-        var numberOfKahoots = 50;
-        var namingMethod = 0;
-        var namingMethods = ["Random name", "Random Ending", "Choose Name"];
-        //var namingMethods = ["Random name", "Random Ending", "Random Caps"];
-        var namesExample = ["Ben Dover", "Eileen Dover", "Not in ur class", "Stephanie", "Sportacus", "Robbie Rotten", "Ziggy", "L0kesh;)", "RealPerson.mp4", "ur search history", "Cael Cooper:)", "Kim-Jong Uno", "Sernie Banders", "lorcan't", "Not A Bot", "setup.exe", "admin1"];
-        var addMoreButton = document.createElement("input");
-        addMoreButton.type = "button";
-        addMoreButton.value = "Smash More!";
-        addMoreButton.class = "clickable";
-        addMoreButton.onmousedown = function() {
-            addMoreKahoots();
-        };
-        addMoreButton.style = "margin-bottom:0.5%;margin-left:0.5%;width:99%;height:50px;position:fixed;display:block;bottom:0;background-color:#333;outline: 0;box-shadow: none;border: 1px solid #2e2e2e;color:white;font-family: montserrat,'helvetica neue',helvetica,arial,sans-serif;font-weight: 700;font-size:20px;";
+    function numberChanging() {
+        if (Number($("#numberOfKahoots").val()) > 1e3) $("#numberOfKahoots").val(1e3), hasWarnedOfMax || (hasWarnedOfMax = !0, $("#dialog").dialog());
+        else if (Number($("#numberOfKahoots").val()) > 200 && !hasWarnedRecommended) {
+            $("#warningDialog").dialog({
+                resizable: !1,
+                height: "auto",
+                width: "auto",
+                modal: !0,
+                buttons: {
+                    "200 sounds good!": function() {
+                        $("#numberOfKahoots").val(200), $(this).dialog("close")
+                    },
+                    "Smash more!": function() {
+                        hasWarnedRecommended = !0, $(this).dialog("close")
+                    }
+                }
+            })
+        }
+    }
+
+    function hideVerify(e) {
+        e ? ($("#2step").slideUp(100), $("#verifyButton").slideUp(100)) : ($("#2step").slideUp(100), $("#verifyButton").show())
+    }
+
+    function needVerification() {
+        $("#verifyButton").show(), verficationCode = "", $("#2Step--0").attr("src", "images/redAnswer.png"), $("#2Step--1").attr("src", "images/blueAnswer.png"), $("#2Step--2").attr("src", "images/yellowAnswer.png"), $("#2Step--3").attr("src", "images/greenAnswer.png"), $("#2step").show()
+    }
+
+    function randomCaps(e) {
+        for (var t = "", n = 0; n < e.length; n++) Math.random() > .5 ? t += e[n] : t += e[n];
+        return t
+    }
+
+    function generateRandomLetter(e) {
+        for (var t = "", n = "qwertyuiopasdfghjklzxcvbnm1234567890", o = 0; o < e; o++) t += n[Math.floor(Math.random() * n.length)];
+        return t
+    }
+
+    function generateName(e) {
+        var t = "";
+        switch (e) {
+            case 0:
+                t = randomCaps(namesExample[Math.floor(Math.random() * namesExample.length)]);
+                break;
+            case 1:
+                t = ($("#base").val().substr(0, 11) + "." + generateRandomLetter(5)).substr(0, 16);
+                break;
+            case 2:
+                if ($("#base").val().length < 7) {
+                    t = randomCaps($("#base").val()) + "" + generateRandomLetter(0);
+                    break
+                }
+                t = randomCaps($("#base").val());
+                break;
+            default:
+                t = "Smasher" + generateRandomLetter(5)
+        }
+        return t
+    }
+
+    function click2StepButton(e) {
+        if (-1 == verficationCode.indexOf(e) && ($("#2Step--" + e).attr("src", "images/pressed_" + $("#2Step--" + e).attr("src").split("/")[1]), 4 != verficationCode.length && (verficationCode += String(e)), 3 == verficationCode.length)) {
+            for (var t = ["0", "1", "2", "3"], n = 0; n < verficationCode.length; n++) t.splice(t.indexOf(verficationCode[n]), 1);
+            verficationCode += t[0], $("#2Step--" + t[0]).attr("src", "images/pressed_" + $("#2Step--" + t[0]).attr("src").split("/")[1]), $("#asdfghjklqwertyuio").attr("steps", verficationCode)
+        }
+    }
+
+    function updateName() {
+        $("#nameExample").html("Example: " + generateName(namingMethod))
+    }
+
+    function showExtension() {
+        $("#install").show(100)
+    }
+
+    function hideExtension() {
+        $("#install").hide(100)
+    }
+
+    function addMoreKahoots() {
+        if (numberOfKahoots >= 1e3) return void document.body.removeChild(verifyButton);
+        if (!hasWarnedRecommended && numberOfKahoots >= 200) {
+            $("#warningDialog").dialog({
+                resizable: !1,
+                height: "auto",
+                width: "auto",
+                modal: !0,
+                buttons: {
+                    "200 sounds good!": function() {
+                        $(this).dialog("close")
+                    },
+                    "Smash more!": function() {
+                        hasWarnedRecommended = !0, numberOfKahoots += 10, $("#asdfghjklqwertyuio").attr("newRequests", 10), $(this).dialog("close")
+                    }
+                }
+            })
+        } else numberOfKahoots += 10, $("#asdfghjklqwertyuio").attr("newRequests", 10)
+    }
+
+    function showSettings() {
+        $("#settings").show(100)
+    }
+
+    function hideSettings() {
+        numberOfKahoots = parseInt($("#numberOfKahoots").val()), $("#settings").hide(100)
+    }
+
+    function showAbout() {
+        $("#info").show(100)
+    }
+
+    function hideAbout() {
+        $("#info").hide(100)
+    }
+
+    function changeNaming() {
+        namingMethod += 1, namingMethod == namingMethods.length && (namingMethod = 0), 0 == namingMethod ? ($("#baseName").slideUp(100), $("#base").slideUp(100)) : ($("#baseName").slideDown(100), $("#base").slideDown(100)), $("#namingMethod").attr("value", namingMethods[namingMethod]), updateName()
+    }
+
+    function buttonClicked() {
+        if (!isSmasherInstalled) return void showExtension();
+        gameID = $("#GamePin").val();
+        var e = !0;
+        if ("" == gameID) return void(e = !1);
+        for (var t = 0; t < gameID.length; t++)
+            if (isNaN(parseInt(gameID[t]))) return void(e = !1);
+        if (1 != buildNumber) return void $("#update").show();
+        if (e) {
+            numberOfKahoots = Number($("#numberOfKahoots").val()), $("#asdfghjklqwertyuio").attr("value", gameID), $("#asdfghjklqwertyuio").attr("namingConvention", namingMethod), $("#asdfghjklqwertyuio").attr("baseName", $("#base").val()), $("#asdfghjklqwertyuio").attr("newRequests", numberOfKahoots);
+            $("#body").html("<h1 style='background-color:#864cbf;margin-top:0;width:111%;margin-left:-5.5%;padding:10px;'>Kahoot smashing in progress...</h1><h2 id='joined'>Smashers joined: 12/50</h2><h2 id='verifiedH2' style='display:none;'>Smashers verified: 0/50</h2><h2 id='answered'>Smashers answered: 12/50</h2><div style='width:300px;margin: 0 auto;'><div style='width:200px;'><img src='images/blueAnswer.png' width=100 style='margin:20px'><p id='blueAnswers' style='text-align:left;margin-top:-100px;font-size:50px;margin-left:125px'>10/50</p></div><div style='width:200px;'><img src='images/greenAnswer.png' width=100 style='margin:20px'><p id='greenAnswers' style='text-align:left;margin-top:-100px;font-size:50px;margin-left:125px'>10/50</p></div><div style='width:200px;'><img src='images/redAnswer.png' width=100 style='margin:20px'><p id='redAnswers' style='text-align:left;margin-top:-100px;font-size:50px;margin-left:125px'>10/50</p></div><div style='width:200px;'><img src='images/yellowAnswer.png' width=100 style='margin:20px'><p id='yellowAnswers' style='text-align:left;margin-top:-100px;font-size:50px;margin-left:125px'>10/50</p></div></div>"), document.body.appendChild(verifyButton), $("#verifyButton").hide(), document.body.appendChild(addMoreButton)
+        }
+    }
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) $(document).ready(function() {
+        $("#mobileBody").css("display", "block"), $("#body").css("display", "none"), /iPhone|iPad|iPod/i.test(navigator.userAgent) && $("#iphoneBody").css("display", "block")
+    });
+    else {
+        var verficationCode = "",
+            buildNumber = -1,
+            isSmasherInstalled = !1,
+            numberOfKahoots = 50,
+            hasWarnedOfMax = !1,
+            hasWarnedRecommended = !1,
+            namingMethod = 0,
+            namingMethods = ["Random name", "Random Ending", "Choose Name"],
+            namesExample = ["Ben Dover", "Eileen Dover", "Not in ur class", "Stephanie", "Sportacus", "Robbie Rotten", "Ziggy", "L0kesh;)", "RealPerson.mp4", "ur search history", "Cael Cooper:)", "Kim-Jong Uno", "Sernie Banders", "lorcan't", "Not A Bot", "setup.exe", "admin1"],
+            addMoreButton = document.createElement("input");
+        addMoreButton.type = "button", addMoreButton.value = "Smash More!", addMoreButton.class = "clickable", addMoreButton.onmousedown = function() {
+            addMoreKahoots()
+        }, addMoreButton.style = "margin-bottom:0.5%;margin-left:0.5%;width:99%;height:50px;position:fixed;display:block;bottom:0;background-color:#333;outline: 0;box-shadow: none;border: 1px solid #2e2e2e;color:white;font-family: montserrat,'helvetica neue',helvetica,arial,sans-serif;font-weight: 700;font-size:20px;";
         var verifyButton = document.createElement("input");
-        verifyButton.id = "verifyButton";
-        verifyButton.type = "button";
-        verifyButton.value = "Verify bots (needed to play)";
-        verifyButton.onmousedown = function() {
+        verifyButton.id = "verifyButton", verifyButton.type = "button", verifyButton.value = "Verify bots (needed to play)", verifyButton.onmousedown = function() {
             $("#2step").slideDown()
-        };
-        verifyButton.class = "clickable";
-        verifyButton.style = "margin-bottom:0.5%;margin-left:0.5%;width:99%;height:50px;position:fixed;display:block;bottom:0;background-color:#333;outline: 0;box-shadow: none;border: 1px solid #2e2e2e;color:white;font-family: montserrat,'helvetica neue',helvetica,arial,sans-serif;font-weight: 700;font-size:20px;margin-bottom:60px;";
-        $("#GamePin").keyup(function(e) {
-            if (e.which == 13) {
-                buttonClicked();
-            }
-        });
-
-        function hideVerify(allJoined) {
-            if (allJoined) {
-                $("#2step").slideUp(100);
-                $("#verifyButton").slideUp(100);
-            } else {
-                $("#2step").slideUp(100);
-                $("#verifyButton").show();
-            }
-        }
-
-        function needVerification() {
-            $("#verifyButton").show();
-            verficationCode = "";
-            $('#2Step--0').attr("src", "images/redAnswer.png");
-            $('#2Step--1').attr("src", "images/blueAnswer.png");
-            $('#2Step--2').attr("src", "images/yellowAnswer.png");
-            $('#2Step--3').attr("src", "images/greenAnswer.png");
-            $("#2step").show();
-        }
-
-        function randomCaps(baseName) {
-            var newName = "";
-            for (var i = 0; i < baseName.length; i++) {
-                if (Math.random() > 0.5) {
-                    newName += baseName[i];
-                } else {
-                    newName += baseName[i];
-                }
-            }
-            return newName;
-        }
-
-        function generateRandomLetter(length) {
-            var randomLetters = "";
-            var letters = "qwertyuiopasdfghjklzxcvbnm1234567890";
-            for (var i = 0; i < length; i++) {
-                randomLetters += letters[Math.floor(Math.random() * letters.length)];
-            }
-            return randomLetters;
-        }
-
-        function generateName(mode) {
-            var name = "";
-            switch (mode) {
-                case 0: // random name
-                    name = randomCaps(namesExample[Math.floor(Math.random() * namesExample.length)]);
-                    break;
-                case 1: // random ending
-                    name = ($("#base").val().substr(0, 11) + "." + generateRandomLetter(5)).substr(0, 16);
-                    break;
-                case 2: // random caps
-                    if ($("#base").val().length < 7) {
-                        //name = randomCaps($("#base").val()) + "." + generateRandomLetter(4);
-                        name = randomCaps($("#base").val()) + "" + generateRandomLetter(0);
-                        break;
-                    } else {
-                        name = randomCaps($("#base").val());
-                        break;
-                    }
-                default:
-                    name = "Smasher" + generateRandomLetter(5);
-            }
-            return name;
-        }
-
-        function click2StepButton(index) {
-            if (verficationCode.indexOf(index) != -1) {
-                return;
-            }
-            $("#2Step--" + index).attr('src', "images/pressed_" + ($("#2Step--" + index).attr('src')).split("/")[1]);
-            if (verficationCode.length != 4) {
-                verficationCode += String(index);
-            }
-            if (verficationCode.length == 3) {
-                var boxes = ["0", "1", "2", "3"];
-                for (var i = 0; i < verficationCode.length; i++) {
-                    boxes.splice(boxes.indexOf(verficationCode[i]), 1);
-                }
-                verficationCode += boxes[0];
-                $("#2Step--" + boxes[0]).attr('src', "images/pressed_" + ($("#2Step--" + boxes[0]).attr('src')).split("/")[1]);
-                $("#asdfghjklqwertyuio").attr("steps", verficationCode);
-            }
-        }
-
-        function updateName() {
-            $("#nameExample").html("Example: " + generateName(namingMethod));
-        }
-
-        function showExtension() {
-            $("#install").show(100);
-        }
-
-        function hideExtension() {
-            $("#install").hide(100);
-        }
-
-        function addMoreKahoots() {
-            $("#asdfghjklqwertyuio").attr("newRequests", 10);
-        }
-
-        function showSettings() {
-            $("#settings").show(100)
-        }
-
-        function hideSettings() {
-            numberOfKahoots = parseInt($("#numberOfKahoots").val());
-            $("#settings").hide(100);
-        }
-
-        function showAbout() {
-            $("#info").show(100);
-        }
-
-        function hideAbout() {
-            $("#info").hide(100);
-        }
-
-        function changeNaming() {
-            namingMethod += 1;
-            if (namingMethod == namingMethods.length) {
-                namingMethod = 0;
-            }
-            if (namingMethod == 0) {
-                $("#baseName").slideUp(100);
-                $("#base").slideUp(100);
-            } else {
-                $("#baseName").slideDown(100);
-                $("#base").slideDown(100);
-            }
-            $("#namingMethod").attr('value', namingMethods[namingMethod]);
-            updateName();
-        }
-
-        function buttonClicked() {
-            if (!isSmasherInstalled) {
-                showExtension();
-                return;
-            }
-            gameID = $("#GamePin").val();
-            var canContinue = true;
-            if (gameID == "") {
-                canContinue = false;
-                return;
-            }
-            for (var i = 0; i < gameID.length; i++) {
-                if (isNaN(parseInt(gameID[i]))) {
-                    canContinue = false;
-                    return;
-                }
-            }
-            if (buildNumber != 1) {
-                $("#update").show();
-                return;
-            }
-            if (canContinue) {
-                $("#asdfghjklqwertyuio").attr("value", gameID);
-                $("#asdfghjklqwertyuio").attr("namingConvention", namingMethod);
-                $("#asdfghjklqwertyuio").attr("baseName", $("#base").val());
-                $("#asdfghjklqwertyuio").attr("newRequests", $("#numberOfKahoots").attr("value"));
-                var newHTML = "<h1 style='background-color:#864cbf;margin-top:0;width:111%;margin-left:-5.5%;padding:10px;'>Kahoot smashing in progress...</h1><h2 id='joined'>Smashers joined: 12/50</h2><h2 id='verifiedH2' style='display:none;'>Smashers verified: 0/50</h2><h2 id='answered'>Smashers answered: 12/50</h2><div style='width:300px;margin: 0 auto;'><div style='width:200px;'><img src='images/blueAnswer.png' width=100 style='margin:20px'><p id='blueAnswers' style='text-align:left;margin-top:-100px;font-size:50px;margin-left:125px'>10/50</p></div><div style='width:200px;'><img src='images/greenAnswer.png' width=100 style='margin:20px'><p id='greenAnswers' style='text-align:left;margin-top:-100px;font-size:50px;margin-left:125px'>10/50</p></div><div style='width:200px;'><img src='images/redAnswer.png' width=100 style='margin:20px'><p id='redAnswers' style='text-align:left;margin-top:-100px;font-size:50px;margin-left:125px'>10/50</p></div><div style='width:200px;'><img src='images/yellowAnswer.png' width=100 style='margin:20px'><p id='yellowAnswers' style='text-align:left;margin-top:-100px;font-size:50px;margin-left:125px'>10/50</p></div></div>";
-                $("#body").html(newHTML);
-                document.body.appendChild(verifyButton);
-                $("#verifyButton").hide();
-                document.body.appendChild(addMoreButton);
-            }
-        }
-        $(document).ready(function() {
+        }, verifyButton.class = "clickable", verifyButton.style = "margin-bottom:0.5%;margin-left:0.5%;width:99%;height:50px;position:fixed;display:block;bottom:0;background-color:#333;outline: 0;box-shadow: none;border: 1px solid #2e2e2e;color:white;font-family: montserrat,'helvetica neue',helvetica,arial,sans-serif;font-weight: 700;font-size:20px;margin-bottom:60px;", $("#GamePin").keyup(function(e) {
+            13 == e.which && buttonClicked()
+        }), $(document).ready(function() {
             setTimeout(function() {
-                $('#androidApp').slideDown(700);
-                updateName();
-                $('#GamePin').on('keyup', function(e) {
-                    if (e.keyCode == 13) {
-                        buttonClicked();
-                    }
-                });
-            }, 500);
+                0 == $("iframe").length && $("#adHere").append("<img src='default.png'></img>"), $("#androidApp").slideDown(700), updateName(), $("#GamePin").on("keyup", function(e) {
+                    13 == e.keyCode && buttonClicked()
+                })
+            }, 500)
         })
     }
 </script>
 <script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-89911532-1', 'auto');
-    ga('send', 'pageview');
+    ! function(e, t, a, n, c, o, s) {
+        e.GoogleAnalyticsObject = c, e[c] = e[c] || function() {
+            (e[c].q = e[c].q || []).push(arguments)
+        }, e[c].l = 1 * new Date, o = t.createElement(a), s = t.getElementsByTagName(a)[0], o.async = 1, o.src = "https://www.google-analytics.com/analytics.js", s.parentNode.insertBefore(o, s)
+    }(window, document, "script", 0, "ga"), ga("create", "UA-89911532-1", "auto"), ga("send", "pageview")
 </script>
-
-</html>
+<style>
+    #adHere {
+        position: absolute;
+        margin-top: 150px;
+        padding: 0;
+        border: 2px solid #000
+    }
+    
+    iframe {
+        margin: 0
+    }
+</style>
